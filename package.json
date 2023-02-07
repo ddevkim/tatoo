@@ -1,0 +1,32 @@
+{
+  "name": "webpack5-boilerplate",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.js -w",
+    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.js -w",
+    "start": "cross-env NODE_ENV=development webpack serve --open"
+  },
+  "private": true,
+  "keywords": [
+    "vanilla javascript",
+    "webpack5"
+  ],
+  "author": "ddevkim@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.3",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.2",
+    "prettier": "^2.8.3",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "dependencies": {
+    "fxjs": "^0.21.3"
+  }
+}
