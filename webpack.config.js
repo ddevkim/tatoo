@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -10,14 +11,24 @@ module.exports = {
   output: {
     filename: "[name].bundle.js",
     path: path.join(__dirname, "dist"),
-    assetModuleFilename: "[hash][ext][query]",
+    publicPath: "/",
+    assetModuleFilename: "assets/[hash][ext][query]",
     clean: true,
   },
-  plugins: [new HtmlWebpackPlugin(), new MiniCssExtractPlugin()],
+  plugins: [
+    new CopyPlugin({ patterns: [{ from: "src/assets", to: "assets" }] }),
+    new HtmlWebpackPlugin({
+      templateParameters: {
+        title: "Make what you want",
+        lang: "en",
+      },
+    }),
+    new MiniCssExtractPlugin(),
+  ],
   devtool: "source-map",
   devServer: {
-    devMiddleware: {
-      publicPath: "/",
+    client: {
+      logging: "none",
     },
     static: {
       directory: path.join(__dirname, "dist"),
@@ -35,10 +46,17 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
+        generator: {
+          filename: "assets/[hash][ext][query]",
+        },
+        parser: {
+          dataUrlCondition: {
+            maxSize: 20 * 1024,
+          },
+        },
       },
     ],
   },
-  watch: true,
   watchOptions: {
     aggregateTimeout: 200,
     ignored: /node_modules/,

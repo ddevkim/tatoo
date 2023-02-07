@@ -5,3 +5,7 @@ body {
 .hello {
   color: red;
 }
+
+canvas {
+  background-color: green;
+}

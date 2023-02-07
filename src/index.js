@@ -1,11 +1,18 @@
 import "./style.css";
-import { go, join } from "fxjs";
+import { loadImg } from "./utils/imageHandler";
+import { drawImgToCanvas, getImageCanvas } from "./utils/canvasHandler";
 
-const component = () => {
-  const el = document.createElement("div");
-  el.innerHTML = go(["hello", "vanilla!"], join(" "));
-  el.classList.add("hello");
-  return el;
+const main = async () => {
+  const image = await loadImg({ uri: "./assets/lake.jpg" });
+  const canvasEl = getImageCanvas({ image });
+  drawImgToCanvas({ canvasEl, image });
+  document.body.appendChild(canvasEl);
 };
 
-document.body.appendChild(component());
+(async () => {
+  try {
+    await main();
+  } catch (e) {
+    console.error("ERROR", e);
+  }
+})();
