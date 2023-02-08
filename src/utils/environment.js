@@ -15,3 +15,9 @@ export function isBrowser() {
     return true;
   }
 }
+
+export const pNow = () => performance.now();
+export const logTime = ({ start }) => {
+  const diffNanoSec = Math.round(pNow() - start) / 1000;
+  console.log(`Process in ${diffNanoSec} ms`);
+};
