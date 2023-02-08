@@ -1,5 +1,5 @@
 body {
-  background-color: gray;
+  background-color: navajowhite;
 }
 
 .hello {
@@ -7,5 +7,7 @@ body {
 }
 
 canvas {
-  background-color: green;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
