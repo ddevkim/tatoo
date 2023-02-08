@@ -1,9 +1,18 @@
-export function createCanvas({ width, height }) {
-  const canvasEl = document.createElement("canvas");
-  if (width) canvasEl.width = width;
-  if (height) canvasEl.height = height;
+import { isBrowser } from "./environment";
+const { createCanvas: createNodeCanvas } = require("canvas");
 
-  return canvasEl;
+export function createCanvas({ width, height }) {
+  if (!width || !height) {
+    throw new Error("Size is required to create Canvas");
+  }
+  if (isBrowser()) {
+    const canvasEl = document.createElement("canvas");
+    canvasEl.width = width;
+    canvasEl.height = height;
+    return canvasEl;
+  } else {
+    return createNodeCanvas(width, height);
+  }
 }
 
 export function drawImgToCanvas({ canvas, image }) {
@@ -12,7 +21,10 @@ export function drawImgToCanvas({ canvas, image }) {
   return canvas;
 }
 
-export function getImageCanvas({ image }) {
+export function getImageToCanvas({ image }) {
+  if (!image) {
+    throw new Error("Not exist image");
+  }
   const { width, height } = image;
   return drawImgToCanvas({ canvas: createCanvas({ width, height }), image });
 }
@@ -25,7 +37,8 @@ export function cloneCanvas({ canvas }) {
   return destCanvas;
 }
 
-export function canvasBlur({ canvas }) {
+export function getImageData({ canvas }) {
+  const { width, height } = canvas;
   const ctx = canvas.getContext("2d");
-  ctx.filter = `blur(10px)`;
+  return ctx.getImageData(0, 0, width, height);
 }

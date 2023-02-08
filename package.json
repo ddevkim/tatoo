@@ -33,6 +33,7 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "canvas": "^2.11.0",
     "fxjs": "^0.21.3"
   }
 }
