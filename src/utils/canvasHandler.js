@@ -42,3 +42,25 @@ export function getImageData({ canvas }) {
   const ctx = canvas.getContext("2d");
   return ctx.getImageData(0, 0, width, height);
 }
+
+export function compositeCanvas({ srcCanvas, destCanvas, compositeOperation }) {
+  if (!compositeOperation) {
+    throw new Error("Composite operation method is not exist");
+  }
+  const { width, height } = srcCanvas;
+  if (width !== destCanvas.width) {
+    throw new Error("Width of two canvases does not match");
+  }
+  if (height !== destCanvas.height) {
+    throw new Error("Height of two canvases does not match");
+  }
+  const overlayedCanvas = createCanvas({ width, height });
+  const ctx = overlayedCanvas.getContext("2d");
+
+  ctx.globalCompositeOperation = compositeOperation;
+
+  ctx.drawImage(srcCanvas, 0, 0);
+  ctx.drawImage(destCanvas, 0, 0);
+
+  return overlayedCanvas;
+}
