@@ -26,7 +26,7 @@
 ![flower_1024.png](src%2Fassets%2Fflower_1024.png)
 
 #### Output Result (Glue Layer)
-![processed.png](..%2F..%2F..%2FDownloads%2Fprocessed.png)
+![flower_processed.png](src%2Fassets%2Fflower_processed.png)
 
 ### Overlayed View
-![download.png](..%2F..%2F..%2FDownloads%2Fdownload.png)
+![flower_source_over.png](src%2Fassets%2Fflower_source_over.png)
